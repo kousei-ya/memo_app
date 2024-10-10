@@ -1,0 +1,130 @@
+body {
+  margin: 5% 25%;
+}
+
+h1 {
+  color: black;
+  font-size: 50px;
+  margin: 2%;
+}
+
+.main {
+  margin-right: 20%;
+}
+
+.list {
+  width: 60%;
+}
+
+.btn1 a{
+  background: #eee;
+  border-radius: 10px;
+  position: relative;
+  display: flex;
+  justify-content: space-around;
+  max-width: 280px;
+  padding: 15px 40px;
+  color: black;
+  font-weight: 500;
+  text-decoration: none;
+  float: right;
+}
+
+.change a{
+  background: #eee;
+  border-radius: 10px;
+  position: relative;
+  display: flex;
+  justify-content: space-around;
+  max-width: 280px;
+  padding: 15px 40px;
+  color: black;
+  font-weight: 500;
+  text-decoration: none;
+  float: right;
+}
+
+.btn2 {
+  display: flex; /* ボタンを横並びにする */
+  justify-content: space-between; /* ボタン同士の間にスペースを確保 */
+  align-items: center; /* ボタンの垂直位置を揃える */
+  margin: 0 25%; /* 見た目を調整 */
+}
+
+button {
+  background-color: #eee; /* 削除ボタンに目立つ色 */
+  color: black;
+  border: none;
+  padding: 15px 40px; /* ボタンの大きさを調整 */
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.new_submit button {
+  background-color: #eee; /* 削除ボタンに目立つ色 */
+  color: black;
+  border: none;
+  padding: 15px 40px; /* ボタンの大きさを調整 */
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-bottom: 50px;
+} 
+
+li {
+  font-size: 30px;
+  margin: 5% 0;
+}
+
+.show_title p {
+  font-size: 40px;
+  margin: 20px;
+}
+
+.show_content p {
+  font-size: 25px;
+  white-space: pre-wrap;
+  margin: 20px;
+}
+
+.show_title {
+  border: solid 3px #333;
+  margin: 10px 0;
+  height: 80px
+}
+
+.show_content {
+  border: solid 3px #333;
+  margin: 70px 0;
+  height: 300px;
+}
+
+input {
+  height: 50px;
+  width: 600px;
+  font-size: 30px;
+  margin-bottom: 50px;
+  border: solid 3px #333;
+}
+
+textarea {
+  height:250px;
+  width: 600px;
+  font-size: 25px;
+  margin-bottom: 50px;
+  border: solid 3px #333;
+}
+
+.new_form {
+  display: flex;
+  flex-direction: column;
+}
+
+.edit button {
+  margin-bottom: 50px;
+}
+
+.error p {
+  font-size: 30px;
+}

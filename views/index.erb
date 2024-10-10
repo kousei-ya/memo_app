@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>メモ一覧</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>メモ一覧</h1>
+  <div class="main">
+    <div class="btn1">
+      <a href="/memo/new">追加</a>
+    </div>
+    <div class="list">
+      <ul>
+        <% @memos.each_with_index do |(id, memo), index| %>
+          <li>
+            <a href="memo/<%= id %>/show">メモ<%= index + 1 %></a>(<%= h memo['title'] %>)
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</body>
+</html>
