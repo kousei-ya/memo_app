@@ -8,7 +8,7 @@
 <body>
   <h1>メモ編集</h1>
   <div class="edit">
-    <form action="/memo/<%= h(@id) %>" method="POST">
+    <form action="/memos/<%= h(@id) %>" method="POST">
       <input type="hidden" name="_method" value="PATCH">
       <input type="text" id="title" name="title" value="<%= h(@memo['title']) %>" required>
       <br>
@@ -16,7 +16,7 @@
       <br>
       <button type="submit">変更</button>
     </form>
-    <a href="/memo">戻る</a>
+    <a href="/memos">戻る</a>
   </div>
 </body>
 </html>
