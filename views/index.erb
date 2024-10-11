@@ -9,13 +9,13 @@
   <h1>メモ一覧</h1>
   <div class="main">
     <div class="btn1">
-      <a href="/memo/new">追加</a>
+      <a href="/memos/new">追加</a>
     </div>
     <div class="list">
       <ul>
-        <% @memos.each_with_index do |(id, memo), index| %>
+        <% @memos.each do |id, memo| %>
           <li>
-            <a href="memo/<%= id %>/show">メモ<%= index + 1 %></a>(<%= h memo['title'] %>)
+            <a href="memos/<%= id %>"><%= h memo['title'] %></a>
           </li>
         <% end %>
       </ul>
