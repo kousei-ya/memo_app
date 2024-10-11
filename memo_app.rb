@@ -23,54 +23,53 @@ not_found do
 end
 
 get '/' do
-  redirect '/memo'
+  redirect '/memos'
 end
 
-get '/memo' do
+get '/memos' do
   @memos = load_memos
   erb :index
 end
+get '/memos/new' do
+  erb :new
+end
 
-get '/memo/:id/show' do
+get '/memos/:id' do
   @id = params[:id]
   @memo = load_memos[@id]
   if @memo
     erb :show
   else
-    halt 404, 'メモが見つかりません'
+    erb :error
   end
 end
 
-get '/memo/new' do
-  erb :new
-end
-
-post '/memo' do
+post '/memos' do
   memos = load_memos
   id = SecureRandom.uuid
   memos[id] = { 'title' => params[:title], 'content' => params[:content] }
   save_memos(memos)
-  redirect '/memo'
+  redirect '/memos'
 end
 
-get '/memo/:id/edit' do
+get '/memos/:id/edit' do
   @id = params[:id]
   @memo = load_memos[@id]
   erb :edit
 end
 
-patch '/memo/:id' do
+patch '/memos/:id' do
   memos = load_memos
   id = params[:id]
   memos[id]['title'] = params[:title]
   memos[id]['content'] = params[:content]
   save_memos(memos)
-  redirect '/memo'
+  redirect '/memos'
 end
 
-delete '/memo/:id/show' do
+delete '/memos/:id' do
   memos = load_memos
   memos.delete(params[:id])
   save_memos(memos)
-  redirect '/memo'
+  redirect '/memos'
 end
