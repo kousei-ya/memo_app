@@ -7,6 +7,9 @@ gem "sinatra"
 gem "webrick"
 gem "sinatra-contrib"
 gem "rackup"
-gem 'rubocop', require: false
-gem 'erb_lint', require: false
 gem "rexml"
+
+group :development do
+  gem 'rubocop', require: false
+  gem 'erb_lint', require: false
+end
