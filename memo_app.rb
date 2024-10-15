@@ -15,11 +15,11 @@ def load_memos
 end
 
 def save_memos(memos)
-  File.write('memo.json', JSON.pretty_generate(memos))
+  File.write('memo.json', JSON.generate(memos))
 end
 
 not_found do
-  erb :error
+  'This is nowhere to be found.'
 end
 
 get '/' do
@@ -40,7 +40,7 @@ get '/memos/:id' do
   if @memo
     erb :show
   else
-    erb :error
+    erb :error_404
   end
 end
 
@@ -55,16 +55,25 @@ end
 get '/memos/:id/edit' do
   @id = params[:id]
   @memo = load_memos[@id]
-  erb :edit
+  if @memo
+    erb :edit
+  else
+    erb :error_404
+  end
 end
 
 patch '/memos/:id' do
   memos = load_memos
   id = params[:id]
-  memos[id]['title'] = params[:title]
-  memos[id]['content'] = params[:content]
-  save_memos(memos)
-  redirect '/memos'
+  @memo = memos[id]
+  if @memo
+    memos[id]['title'] = params[:title]
+    memos[id]['content'] = params[:content]
+    save_memos(memos)
+    redirect '/memos'
+  else
+    erb :error_404
+  end
 end
 
 delete '/memos/:id' do
