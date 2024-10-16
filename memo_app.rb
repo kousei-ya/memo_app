@@ -40,6 +40,7 @@ get '/memos/:id' do
   if @memo
     erb :show
   else
+    status 404
     erb :error_404
   end
 end
@@ -58,6 +59,7 @@ get '/memos/:id/edit' do
   if @memo
     erb :edit
   else
+    status 404
     erb :error_404
   end
 end
@@ -72,6 +74,7 @@ patch '/memos/:id' do
     save_memos(memos)
     redirect '/memos'
   else
+    status 404
     erb :error_404
   end
 end
