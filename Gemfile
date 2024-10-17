@@ -8,6 +8,7 @@ gem "webrick"
 gem "sinatra-contrib"
 gem "rackup"
 gem "rexml"
+gem "pg"
 
 group :development do
   gem 'rubocop', require: false
