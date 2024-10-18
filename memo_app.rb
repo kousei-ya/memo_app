@@ -107,7 +107,6 @@ patch '/memos/:id' do
 end
 
 delete '/memos/:id' do
-  memos = load_memos
   @id = params[:id]
   delete_memo(@id)
   redirect '/memos'
