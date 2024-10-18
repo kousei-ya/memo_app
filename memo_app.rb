@@ -63,8 +63,7 @@ end
 
 get '/memos/:id' do
   @id = params[:id]
-  memos = load_memos
-  @memo = memos[@id]
+  @memo = load_memos[@id]
   if @memo
     erb :show
   else
@@ -82,8 +81,7 @@ end
 
 get '/memos/:id/edit' do
   @id = params[:id]
-  memos = load_memos
-  @memo = memos[@id]
+  @memo = load_memos[@id]
   if @memo
     @title = @memo['title']
     @content = @memo['content']
@@ -95,9 +93,8 @@ get '/memos/:id/edit' do
 end
 
 patch '/memos/:id' do
-  memos = load_memos
   @id = params[:id]
-  @memo = memos[@id]
+  @memo = load_memos[@id]
   if @memo
     title = params[:title]
     content = params[:content]
