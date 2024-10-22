@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>メモ表示</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+  <h1>メモ表示</h1>
+
+  <div class="detail">
+    <div class="show_title">
+      <form action="/memos/<%= h(@id) %>" method="GET">
+        <p><%= h @memo['title'] %></p>
+      </form>
+    </div>
+
+    <div class="show_content">
+      <form action="/memos/<%= h(@id) %>" method="GET">
+        <p><%= h @memo['content'] %></p>
+      </form>
+    </div>
+  </div>
+
+  <div class="btn2">
+    <div class="change">
+      <a href="/memos/<%= h(@id) %>/edit">変更</a>
+    </div>
+
+      <form action="/memos/<%= h(@id) %>" method="POST" style="display:inline;">
+        <input type="hidden" name="_method" value="DELETE">
+        <button type="submit">削除</button>
+      </form>
+  </div>
+
+    <div class="back">
+      <a href="/memos">戻る</a>
+    </div>
+
+</body>
+</html>
