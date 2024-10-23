@@ -82,8 +82,6 @@ get '/memos/:id/edit' do
   @id = params[:id]
   @memo = load_memos[@id]
   if @memo
-    @title = @memo['title']
-    @content = @memo['content']
     erb :edit
   else
     status 404
