@@ -11,7 +11,7 @@ helpers do
 end
 
 def conn
-  @conn ||= PG.connect(dbname: 'memodb')
+  @conn ||= PG.connect(dbname: 'memodb', client_encoding: 'UTF8')
 end
 
 before do
@@ -23,9 +23,9 @@ def load_memos
   memos = {}
   result.each do |row|
     memos[row['id']] = {
-      'id' => row['id'].force_encoding('UTF-8'),
-      'title' => row['title'].force_encoding('UTF-8'),
-      'content' => row['content'].force_encoding('UTF-8')
+      'id' => row['id'],
+      'title' => row['title'],
+      'content' => row['content']
     }
   end
   memos
