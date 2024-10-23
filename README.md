@@ -29,7 +29,7 @@ psql postgres
 ````
 6. メモアプリで使用するデータベースを作成
 ````
-CREATE TABLE memo_db;
+CREATE DATABASE memo_db;
 ````
 7. データベースから抜ける
 ````
