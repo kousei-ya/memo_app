@@ -35,7 +35,7 @@ def create_memo(title, content)
   conn.exec_params('INSERT INTO memos(title, content) VALUES ($1, $2);', [title, content])
 end
 
-def edit_memo(title, content, id)
+def update_memo(title, content, id)
   conn.exec_params('UPDATE memos SET title = $1, content = $2 WHERE id = $3', [title, content, id])
 end
 
@@ -95,7 +95,7 @@ patch '/memos/:id' do
   if @memo
     title = params[:title]
     content = params[:content]
-    edit_memo(title, content, @id)
+    update_memo(title, content, @id)
     redirect '/memos'
   else
     status 404
