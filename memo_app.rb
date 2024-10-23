@@ -15,8 +15,7 @@ def conn
 end
 
 before do
-  result = conn.exec("SELECT * FROM information_schema.tables WHERE table_name = 'memos'")
-  conn.exec('CREATE TABLE memos (id serial, title varchar(255), content text)') if result.values.empty?
+  conn.exec('CREATE TABLE IF NOT EXISTS memos (id serial, title varchar(255), content text)')
 end
 
 def load_memos
