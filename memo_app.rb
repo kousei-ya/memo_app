@@ -20,15 +20,13 @@ end
 
 def load_memos
   result = conn.exec('SELECT * FROM memos')
-  memos = {}
-  result.each do |row|
+  result.each_with_object({}) do |row, memos|
     memos[row['id']] = {
       'id' => row['id'],
       'title' => row['title'],
       'content' => row['content']
     }
   end
-  memos
 end
 
 def create_memo(title, content)
