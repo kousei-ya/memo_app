@@ -9,7 +9,7 @@
 ## 使用手順
 1. 以下のコマンドによリ、ポジトリをクローン
 ````
-git clone -b memo https://github.com/kousei-ya/memo_app.git
+git clone -b memodb https://github.com/kousei-ya/memo_app.git
 ````
 2. ディレクトリを移動
 ````
@@ -19,11 +19,27 @@ cd memo_app
 ````
 bundle install
 ````
-4. プログラムを実行するとメモアプリが起動
+4. データベースサーバを起動
+````
+sudo service postgresql start
+````
+5. postgresにアクセス
+````
+psql postgres
+````
+6. メモアプリで使用するデータベースを作成
+````
+CREATE DATABASE memo_db;
+````
+7. データベースから抜ける
+````
+\q
+````
+8. プログラムを実行するとメモアプリが起動
 ````
 ruby memo_app.rb
 ````
-5. 以下のURLにアクセス
+9. 以下のURLにアクセス
 ````
 http://localhost:4567/
 ````

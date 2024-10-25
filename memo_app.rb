@@ -2,7 +2,7 @@
 
 require 'sinatra'
 require 'sinatra/reloader'
-require 'json'
+require 'pg'
 
 helpers do
   def h(text)
@@ -10,12 +10,35 @@ helpers do
   end
 end
 
-def load_memos
-  File.exist?('memo.json') ? JSON.parse(File.read('memo.json')) : {}
+def conn
+  @conn ||= PG.connect(dbname: 'memodb', client_encoding: 'UTF8')
 end
 
-def save_memos(memos)
-  File.write('memo.json', JSON.generate(memos))
+before do
+  conn.exec('CREATE TABLE IF NOT EXISTS memos (id serial, title varchar(255), content text)')
+end
+
+def load_memos
+  result = conn.exec('SELECT * FROM memos')
+  result.each_with_object({}) do |row, memos|
+    memos[row['id']] = {
+      'id' => row['id'],
+      'title' => row['title'],
+      'content' => row['content']
+    }
+  end
+end
+
+def create_memo(title, content)
+  conn.exec_params('INSERT INTO memos(title, content) VALUES ($1, $2);', [title, content])
+end
+
+def update_memo(title, content, id)
+  conn.exec_params('UPDATE memos SET title = $1, content = $2 WHERE id = $3', [title, content, id])
+end
+
+def delete_memo(id)
+  conn.exec_params('DELETE FROM memos WHERE id = $1', [id])
 end
 
 not_found do
@@ -30,6 +53,7 @@ get '/memos' do
   @memos = load_memos
   erb :index
 end
+
 get '/memos/new' do
   erb :new
 end
@@ -41,15 +65,14 @@ get '/memos/:id' do
     erb :show
   else
     status 404
-    erb :error_404
+    erb :error_not_found
   end
 end
 
 post '/memos' do
-  memos = load_memos
-  id = SecureRandom.uuid
-  memos[id] = { 'title' => params[:title], 'content' => params[:content] }
-  save_memos(memos)
+  title = params[:title]
+  content = params[:content]
+  create_memo(title, content)
   redirect '/memos'
 end
 
@@ -60,28 +83,25 @@ get '/memos/:id/edit' do
     erb :edit
   else
     status 404
-    erb :error_404
+    erb :error_not_found
   end
 end
 
 patch '/memos/:id' do
-  memos = load_memos
-  id = params[:id]
-  @memo = memos[id]
+  @id = params[:id]
+  @memo = load_memos[@id]
   if @memo
-    memos[id]['title'] = params[:title]
-    memos[id]['content'] = params[:content]
-    save_memos(memos)
+    title = params[:title]
+    content = params[:content]
+    update_memo(title, content, @id)
     redirect '/memos'
   else
     status 404
-    erb :error_404
+    erb :error_not_found
   end
 end
 
 delete '/memos/:id' do
-  memos = load_memos
-  memos.delete(params[:id])
-  save_memos(memos)
+  delete_memo(params[:id])
   redirect '/memos'
 end
